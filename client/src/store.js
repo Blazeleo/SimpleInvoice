@@ -17,10 +17,10 @@ const status =['pending', 'delivered', 'returned']
 
 
 const lenders = [
-    { name: 'Satvik A', type: 'mistnest', quantity: 20, date: new Date(), status: 'pending', dateDue: ''},
+    { name: 'Panshak Solomon', type: 'mistnest', quantity: 20, date: new Date(), status: 'pending', dateDue: ''},
     { name: 'Iniunam Iniunam', type: 'gps', quantity: 20, date: new Date(), status: 'pending', dateDue: ''},
     { name: 'Bello Adamu', type: 'camera', quantity: 20, date: new Date(), status: 'pending', dateDue: ''},
-    { name: 'Satvik A', type: 'trap', quantity: 20, date: new Date(), status: 'pending', dateDue: ''},
+    { name: 'Panshak Solomon', type: 'trap', quantity: 20, date: new Date(), status: 'pending', dateDue: ''},
     { name: 'Bello Adamu', type: 'gps', quantity: 20, date: new Date(), status: 'pending', dateDue: ''},
 ]
 
