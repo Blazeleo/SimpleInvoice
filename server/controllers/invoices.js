@@ -8,7 +8,7 @@ import InvoiceModel from '../models/InvoiceModel.js'
 
 export const getInvoicesByUser = async (req, res) => {
     const {searchQuery} = req.query;
-
+    // console.log(typeof(searchQuery));
     try {
         const invoices = await InvoiceModel.find({ creator: searchQuery });
 
@@ -45,6 +45,21 @@ export const getInvoices = async (req, res) => {
         
     }
     
+}
+
+export const InvoiceSearchQueryDB = async(req,res) =>{
+    try{
+        const searchQuery = req.query.searchQuery;
+        console.log("hello");
+        console.log(searchQuery);
+
+        const qRes = await InvoiceModel.find({"client.name": searchQuery});
+        console.log(qRes);
+        res.status(200).json(qRes)
+    }catch(error)
+    {
+        res.status(409).json(error.message) 
+    }
 }
 
 

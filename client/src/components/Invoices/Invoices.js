@@ -21,9 +21,10 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import Container from '@material-ui/core/Container'
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
+import SearchIcon from '@material-ui/icons/Search';
 import { useLocation } from 'react-router-dom';
 
-import { deleteInvoice, getInvoicesByUser } from '../../actions/invoiceActions';
+import { deleteInvoice, getInvoicesByUser,getInvoiceSearch } from '../../actions/invoiceActions';
 import NoData from '../svgIcons/NoData';
 import Spinner from '../Spinner/Spinner'
 import { useSnackbar } from 'react-simple-snackbar'
@@ -117,22 +118,42 @@ const Invoices = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
-  const user = JSON.parse(localStorage.getItem('profile'))
-  const rows = useSelector(state => state.invoices.invoices)
+  const user = JSON.parse(localStorage.getItem('profile'));
+
+  const invoice = useSelector((state) => state);
+  console.log(invoice);
+  
+  
+  const defState = useSelector(state => state.invoices.invoices)
+  console.log(defState);  
+  
+  
+  const [rows, setRows] = useState(defState);
+  
+  const searchRes = useSelector(state => state.invoices.searchRecords)
+  
+  useEffect(() => {
+    console.log('wow this is rows');
+    console.log(rows);
+  }, [rows])
+  
+
   const isLoading = useSelector(state => state.invoices.isLoading)
         // eslint-disable-next-line 
   const [openSnackbar, closeSnackbar] = useSnackbar()
 
-  // const rows = []
+  const [searchQuery,setSearchQuery] = useState('');
 
 
-    // useEffect(() => {
-    //     dispatch(getInvoices());
-    // }, [dispatch]);
+    useEffect(() => {
+      dispatch(getInvoiceSearch({searchQuery}));
+      setRows(searchRes);
+    }, [dispatch, searchQuery]);
 
     useEffect(() => {
       dispatch(getInvoicesByUser({ search: user?.result?._id || user?.result?.googleId}));
       // eslint-disable-next-line
+     
     },[location])
 
 
@@ -194,8 +215,19 @@ const Invoices = () => {
   }
   
   return (
-    <div>
-    <Container style={{width: '85%', paddingTop: '70px', paddingBottom: '50px', border: 'none'}} >
+    <div style={{display: 'flex',flexFlow:'column wrap', alignItems:'flex-end'}}>
+      <div className="SearchBar" style={{justifyContent: 'center',alignItems:'center',width:'400px',backgroundColor:'#d1c9c9',marginRight:'10vw'}}>
+      <div style={{ display:'flex',alignItems: 'center', justifyContent: 'center', padding: '5px', margin: '1em', fontFamily:'Roboto',fontSize: '18px'}}>
+        <input 
+         type="text" placeholder="Search" id="InvoiceSearchQuery"
+         style={{width: '200px', padding: '10px', borderRadius: '5px', border: 'solid 1px #ccc'}} 
+         value = {searchQuery}
+         onChange = {(e) => setSearchQuery(e.target.value)}
+         />       
+        <SearchIcon style={{width: '1.5em', height: '1.5em',backgroundColor:'#aeafae'}}/>
+      </div>
+      </div>
+    <Container style={{width: '85%', paddingTop: '20px', paddingBottom: '50px', border: 'none'}} >
         <TableContainer component={Paper} elevation={0}>
       <Table className={classes.table} aria-label="custom pagination table">
 
