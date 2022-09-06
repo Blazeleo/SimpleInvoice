@@ -32,7 +32,7 @@ export const getInvoice = (id) => async (dispatch)=> {
 export const createInvoice =(invoice, history) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING })
-        const { data } = await api.addInvoice(invoice)
+        const { data } = await api.addInvoice(invoice) //Api call
         dispatch({ type: ADD_NEW, payload: data })
         history.push(`/invoice/${data._id}`)
         dispatch({ type: END_LOADING })
