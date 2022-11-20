@@ -62,7 +62,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-const Modal = ({ setOpen, open, invoice }) => {
+const Modal = ({ setOpen, open, invoice}) => {
   const dispatch = useDispatch();
 
   const [payStatus,setPayStatus] = useState("");
@@ -139,7 +139,9 @@ const Modal = ({ setOpen, open, invoice }) => {
     // clear()
   };
 
-  const clear = () => {};
+  useEffect(()=>{
+    setPayment({...payment, amountPaid:Number(invoice.total)})
+},[]);
 
   const handleClose = () => {
     setOpen(false);

@@ -36,8 +36,9 @@ app.use('/profiles', profile)
 
 // NODEMAILER TRANSPORT FOR SENDING INVOICE VIA EMAIL
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port : process.env.SMTP_PORT,
+    // host: process.env.SMTP_HOST,
+    // port : process.env.SMTP_PORT,
+    service: 'gmail',
     auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
@@ -58,7 +59,7 @@ app.post('/send-pdf', (req, res) => {
        
           // send mail with defined transport object
         transporter.sendMail({
-            from: ` Arc Invoice <hello@arcinvoice.com>`, // sender address
+            from: ` Simple Invoice <satvikvenkatannapragada8@gmail.com>`, // sender address
             to: `${email}`, // list of receivers
             replyTo: `${company.email}`,
             subject: `Invoice from ${company.businessName ? company.businessName : company.name}`, // Subject line
@@ -71,6 +72,7 @@ app.post('/send-pdf', (req, res) => {
         });
 
         if(err) {
+            console.log("Error Inside");
             res.send(Promise.reject());
         }
         res.send(Promise.resolve());

@@ -18,9 +18,6 @@ function Chart({ paymentHistory }) {
     }
   }
 
-  console.log("pay " + paymentDates.toString());
-  console.log("amt " +paymentReceived.toString());
-
   const series = [
     {
       name: "Payment Recieved",
