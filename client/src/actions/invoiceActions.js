@@ -1,5 +1,5 @@
 import * as api from '../api/index'
-
+import { useDispatch, useSelector } from 'react-redux'
 import { ADD_NEW, UPDATE, DELETE, GET_INVOICE, FETCH_INVOICE_BY_USER, START_LOADING, END_LOADING } from './constants'
 export const getInvoicesByUser =(searchQuery) => async (dispatch) => {
     try {
@@ -10,6 +10,17 @@ export const getInvoicesByUser =(searchQuery) => async (dispatch) => {
     } catch (error) {
       console.log(error.response)
       
+    }
+  }
+
+  export const getInvoiceSearch = (searchQuery) => async (dispatch) => {
+    try{
+        const {data} = await api.getInvoiceSearch(searchQuery)
+        dispatch({type: "Update_Search_Records", payload: data})
+        console.log(data);
+    }
+    catch(error){
+      console.log(error.response)
     }
   }
 

@@ -14,6 +14,10 @@ const invoices = (state = { isLoading: true, invoices: [] }, action) => {
           currentPage: action.payload.currentPage,
           numberOfPages: action.payload.numberOfPages,
         };
+      case "Update_Search_Records":
+        return {...state, searchRecords: action.payload};
+      
+
       case FETCH_INVOICE_BY_USER:
         return { ...state, invoices: action.payload };
 

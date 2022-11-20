@@ -15,6 +15,7 @@ export const addInvoice =( invoice ) => API.post('/invoices', invoice) //Post re
 export const updateInvoice = (id, updatedInvoice) => API.patch(`/invoices/${id}`, updatedInvoice)
 export const deleteInvoice =(id) => API.delete(`/invoices/${id}`)
 export const fetchInvoicesByUser = (searchQuery) => API.get(`/invoices?searchQuery=${searchQuery.search}`);
+export const getInvoiceSearch = (searchQuery) => API.get(`/invoices/search?searchQuery=${searchQuery}`);
 
 export const fetchClient = (id) => API.get(`/clients/${id}`);
 export const fetchClients = (page) => API.get(`/clients?page=${page}`);

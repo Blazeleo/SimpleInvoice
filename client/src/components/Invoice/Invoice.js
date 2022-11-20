@@ -123,19 +123,7 @@ const Invoice = () => {
     // eslint-disable-next-line
   }, [dispatch]);
 
-  useEffect(() => {
-    if (invoice) {
-      //Automatically set the default invoice values as the ones in the invoice to be updated
-      setInvoiceData(invoice);
-      setRates(invoice.rates);
-      setClient(invoice.client);
-      setType(invoice.type);
-      setStatus(invoice.status);
-      setSelectedDate(invoice.dueDate);
-    }
-  }, [invoice]);
-
-  useEffect(() => {
+    useEffect(() => {
     if (type === "Receipt") {
       setStatus("Paid");
     } else {
