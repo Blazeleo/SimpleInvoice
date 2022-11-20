@@ -10,8 +10,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { createProfile } from '../../actions/profile'
 import { useSnackbar } from 'react-simple-snackbar'
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-
+import Particles from "react-tsparticles";
+import conf from '../Home/particlesjs-config'
+import { loadFull } from "tsparticles";
+import { useCallback } from "react";
 
 const initialState ={ firstName: '', lastName: '', email: '', password: '', confirmPassword: '', profilePicture: '', bio: ''}
 
@@ -50,8 +52,12 @@ const Login = () => {
     if(user) {
       history.push('/dashboard')
     }
-
+    const particlesInit = useCallback(async engine => {
+      await loadFull(engine);
+  }, []);
     return (
+      <>
+       <Particles params={conf} init={particlesInit} className={styles.particles} /> 
         <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={2}>
         <Avatar className={classes.avatar}>
@@ -81,17 +87,18 @@ const Login = () => {
                     
                 </div>
           </div>
-          <Grid container justifyContent="flex-end">
+          <Grid container justifyContent="center">
             <Grid item>
-              <Button onClick={switchMode}>
+              <Button onClick={switchMode} >
                 { isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
               </Button>
             </Grid>
           </Grid>
-        <Link to="forgot"><p style={{textAlign: 'center', color: '#1d7dd6', marginTop: '20px'}}>Forgotten Password?</p></Link>
+        {/* <Link to="forgot"><p style={{textAlign: 'center', color: '#1d7dd6', marginTop: '20px'}}>Forgotten Password?</p></Link> */}
         </form>
       </Paper>
     </Container>
+    </>
     )
 }
 

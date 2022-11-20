@@ -174,6 +174,7 @@ const InvoiceDetails = () => {
   .then(() => setSendStatus('success'))
       .catch((error) => {
         console.log(error)
+        console.log("Error")
         setSendStatus('error')
       })
   }
@@ -203,7 +204,7 @@ if(!invoice) {
         <div className={styles.PageLayout}>
            {invoice?.creator?.includes(user?.result?._id || user?.result?.googleId) && (
             <div className={styles.buttons}>
-                  {/* <ProgressButton 
+                  <ProgressButton 
                     onClick={sendPdf} 
                     state={sendStatus}
                     onSuccess={()=> openSnackbar("Invoice sent successfully")}
@@ -215,7 +216,7 @@ if(!invoice) {
                   onClick={createAndDownloadPdf} 
                   state={downloadStatus}>
                   Download PDF
-                </ProgressButton> */}
+                </ProgressButton>
 
                 <button 
                 className={styles.btn}  

@@ -10,9 +10,8 @@ API.interceptors.request.use((req) => {
     return req
 })
 
-// export const fetchInvoices =() => API.get('/invoices')
 export const fetchInvoice =(id) => API.get(`/invoices/${id}`)
-export const addInvoice =( invoice ) => API.post('/invoices', invoice)
+export const addInvoice =( invoice ) => API.post('/invoices', invoice) //Post request to the server
 export const updateInvoice = (id, updatedInvoice) => API.patch(`/invoices/${id}`, updatedInvoice)
 export const deleteInvoice =(id) => API.delete(`/invoices/${id}`)
 export const fetchInvoicesByUser = (searchQuery) => API.get(`/invoices?searchQuery=${searchQuery.search}`);
